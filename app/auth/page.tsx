@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { AuthForm } from "@/components/forms/AuthForm";
 import { usePathname } from "next/navigation";
+import { Suspense } from "react";
 
 export default function AuthPage() {
   const pathname = usePathname();
@@ -75,7 +76,13 @@ export default function AuthPage() {
 
           {/* RIGHT AUTH FORM */}
           <div className="flex justify-center lg:justify-end">
-            <AuthForm />
+            <Suspense fallback={
+              <div className="bg-white rounded-[40px] p-10 md:p-14 border border-[#1a1f1d]/5 shadow-2xl w-full max-w-[540px] h-[600px] flex items-center justify-center">
+                <div className="w-8 h-8 border-4 border-[#0f766e] border-t-transparent rounded-full animate-spin"></div>
+              </div>
+            }>
+              <AuthForm />
+            </Suspense>
           </div>
 
         </main>

@@ -58,7 +58,7 @@ export default function NotificationsPage() {
                 <div>
                   <h3 className="text-[17px] font-bold text-[#1c1a17] mb-2">{notification.title}</h3>
                   <p className="text-[14px] text-[#5f685f] font-semibold">
-                    {notification.type || 'Activity'} • {notification.timestamp || 'Just now'}
+                    {notification.type || 'Activity'} • {notification.createdAt || 'Just now'}
                   </p>
                 </div>
                 <div className="flex items-center space-x-4">
