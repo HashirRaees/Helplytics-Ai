@@ -26,14 +26,16 @@ export const mockRequests: HelpRequest[] = [
   {
     _id: "req-1",
     title: "Need help refining my MERN portfolio before interviews",
-    description: "I have two interviews this week and need feedback on the structure, case studies, and visual polish of my portfolio.",
+    description:
+      "I have two interviews this week and need feedback on the structure, case studies, and visual polish of my portfolio.",
     category: "Career support",
     urgency: "high",
     status: "open",
     tags: ["portfolio", "mern", "interview", "feedback"],
     location: "Karachi",
     suggestedSkills: ["react", "design", "mentoring"],
-    aiInsight: "Helplytics suggests Career support with high urgency. Best matched skills: react, design, mentoring.",
+    aiInsight:
+      "Helplytics suggests Career support with high urgency. Best matched skills: react, design, mentoring.",
     createdAt: new Date().toISOString(),
     createdBy: {
       _id: "user-1",
@@ -58,7 +60,8 @@ export const mockRequests: HelpRequest[] = [
   {
     _id: "req-2",
     title: "Looking for someone to explain Express auth middleware",
-    description: "I understand JWT basics but I am stuck on protect and authorize middleware flow in a Node and Express backend.",
+    description:
+      "I understand JWT basics but I am stuck on protect and authorize middleware flow in a Node and Express backend.",
     category: "Tech help",
     urgency: "medium",
     status: "open",
@@ -126,7 +129,11 @@ export const mockConversations: Conversation[] = [
       { _id: "demo-user", name: "Amina Tariq", role: "both" },
       { _id: "user-1", name: "Hassan Malik", role: "need_help" }
     ],
-    request: { title: "Need help refining my MERN portfolio before interviews", category: "Career support", urgency: "high" },
+    request: {
+      title: "Need help refining my MERN portfolio before interviews",
+      category: "Career support",
+      urgency: "high"
+    },
     lastMessageAt: new Date().toISOString(),
     messages: [
       {
@@ -164,7 +171,16 @@ export const mockLeaders = [
   }
 ];
 
-export const mockAiCenter = {
+export const mockAiCenter: {
+  insights: {
+    topDemandSkills: [string, number][];
+    recentRequests: HelpRequest[];
+  };
+  userSuggestions: {
+    recommendedSkills: string[];
+    nextBestRole: string;
+  };
+} = {
   insights: {
     topDemandSkills: [
       ["react", 6],

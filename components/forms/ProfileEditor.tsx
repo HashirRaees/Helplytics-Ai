@@ -3,7 +3,7 @@
 import { FormEvent, useEffect, useState } from "react";
 import { api } from "@/lib/api";
 import { sessionStore } from "@/lib/storage";
-import { SessionUser, UserRole } from "@/lib/types";
+import { SessionUser } from "@/lib/types";
 
 const asText = (list?: string[]) => (list && list.length ? list.join(", ") : "");
 
@@ -27,8 +27,14 @@ export function ProfileEditor() {
       role: formData.get("role"),
       headline: formData.get("headline"),
       bio: formData.get("bio"),
-      skills: String(formData.get("skills") || "").split(",").map((item) => item.trim()).filter(Boolean),
-      interests: String(formData.get("interests") || "").split(",").map((item) => item.trim()).filter(Boolean),
+      skills: String(formData.get("skills") || "")
+        .split(",")
+        .map((item) => item.trim())
+        .filter(Boolean),
+      interests: String(formData.get("interests") || "")
+        .split(",")
+        .map((item) => item.trim())
+        .filter(Boolean),
       location: formData.get("location"),
       availability: formData.get("availability"),
     });
@@ -49,7 +55,7 @@ export function ProfileEditor() {
   return (
     <form onSubmit={handleSubmit} className="panel space-y-4 p-7">
       <div>
-        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-[var(--primary)]">Profile</p>
+        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-(--primary)">Profile</p>
         <h1 className="mt-2 text-3xl font-semibold">{user.name}</h1>
       </div>
       <input className="input" name="name" defaultValue={user.name} placeholder="Name" />

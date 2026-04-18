@@ -1,20 +1,28 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #f4f1ea;
-  --surface: #fffdf9;
-  --surface-strong: #ffffff;
-  --surface-muted: #f1ece4;
-  --text: #1c1a17;
-  --text-soft: #6f675e;
-  --line: rgba(28, 26, 23, 0.1);
+  --bg: #f4efe6;
+  --surface: rgba(255, 250, 243, 0.88);
+  --surface-strong: #fffaf3;
+  --surface-dark: #1d2d2a;
+  --text: #1a1f1d;
+  --muted: #5f685f;
+  --line: rgba(34, 54, 47, 0.1);
   --primary: #0f766e;
   --primary-strong: #115e59;
   --accent: #f59e0b;
   --danger: #dc2626;
-  --shadow: 0 18px 48px rgba(20, 18, 14, 0.08);
-  --font-sans: "Segoe UI", "SF Pro Display", "Helvetica Neue", "Avenir Next", sans-serif;
-  --font-mono: "IBM Plex Mono", "SFMono-Regular", "Cascadia Code", monospace;
+  --success: #15803d;
+  --shadow: 0 24px 60px rgba(17, 33, 29, 0.12);
+  --radius-xl: 32px;
+  --radius-lg: 22px;
+  --container: 1180px;
+  --heading-font: var(--font-space-grotesk), "Space Grotesk", "Segoe UI", sans-serif;
+  --body-font: var(--font-plus-jakarta-sans), "Plus Jakarta Sans", "Segoe UI", sans-serif;
+ 
+  /* Maintain compatibility with previous Tailwind utility classes if needed */
+  --font-display: var(--heading-font);
+  --font-sans: var(--body-font);
 }
 
 * {
@@ -48,20 +56,29 @@ select {
 }
 
 .panel {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(255, 253, 249, 0.96));
+  background: var(--surface-strong);
   border: 1px solid var(--line);
-  border-radius: 24px;
+  border-radius: var(--radius-xl);
   box-shadow: var(--shadow);
 }
 
 .soft-panel {
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(28, 26, 23, 0.08);
-  border-radius: 20px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
 }
 
 .text-soft {
-  color: var(--text-soft);
+  color: var(--muted);
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.78rem;
+  color: var(--primary-strong);
+  font-weight: 800;
+  font-family: var(--font-display);
 }
 
 .chip {
@@ -91,10 +108,14 @@ select {
   transform: translateY(-1px);
 }
 
+.bg-brand-gradient {
+  background: linear-gradient(135deg, rgb(15, 118, 110) 0%, rgb(20, 184, 166) 100%);
+}
+
 .btn-primary {
   border: none;
   border-radius: 18px;
-  background: linear-gradient(135deg, var(--primary), var(--primary-strong));
+  background: linear-gradient(135deg, rgb(15, 118, 110) 0%, rgb(20, 184, 166) 100%);
   color: white;
   padding: 0.9rem 1.2rem;
   font-weight: 700;
@@ -104,17 +125,26 @@ select {
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
+  filter: brightness(1.05);
 }
 
 .btn-secondary {
-  border-radius: 18px;
-  border: 1px solid rgba(28, 26, 23, 0.08);
-  background: rgba(255, 255, 255, 0.8);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+  background: var(--surface);
   color: var(--text);
-  padding: 0.9rem 1.1rem;
+  padding: 0.8rem 1rem;
   font-weight: 700;
+  text-wrap: nowrap;
   cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background: var(--surface-strong);
+  transform: translateY(-1px);
+  border-color: rgba(34, 54, 47, 0.2);
 }
 
 .grid-bg {

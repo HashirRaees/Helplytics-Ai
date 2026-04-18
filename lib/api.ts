@@ -33,6 +33,7 @@ async function request<T>(path: string, options: ApiOptions = {}): Promise<T> {
 }
 
 export const api = {
+  // --- AUTH ---
   async login(payload: { email: string; password: string }) {
     return request<{ data: { token: string; user: typeof mockUser } }>("/auth/login", {
       method: "POST",
@@ -52,30 +53,33 @@ export const api = {
       withAuth: true,
     });
   },
+
+  // --- DASHBOARD ---
   async getDashboard() {
-    try {
-      return await request<{ data: typeof mockDashboard }>("/dashboard", { withAuth: true });
-    } catch {
+    // If guest, show mock data
+    if (!sessionStore.getToken()) {
       return { data: mockDashboard };
     }
+    // If logged in, strictly use backend
+    return await request<{ data: typeof mockDashboard }>("/dashboard", { withAuth: true });
   },
+
+  // --- REQUESTS ---
   async getRequests(search = "") {
-    try {
-      return await request<{ data: { requests: typeof mockRequests } }>(`/requests${search}`);
-    } catch {
+    if (!sessionStore.getToken()) {
       return { data: { requests: mockRequests } };
     }
+    return await request<{ data: { requests: typeof mockRequests } }>(`/requests${search}`);
   },
   async getRequest(id: string) {
-    try {
-      return await request<{ data: { request: (typeof mockRequests)[number] } }>(`/requests/${id}`);
-    } catch {
+    if (!sessionStore.getToken()) {
       return {
         data: {
           request: mockRequests.find((item) => item._id === id) || mockRequests[0],
         },
       };
     }
+    return await request<{ data: { request: (typeof mockRequests)[number] } }>(`/requests/${id}`);
   },
   async createRequest(payload: Record<string, unknown>) {
     return request<{ data: { request: (typeof mockRequests)[number] } }>("/requests", {
@@ -98,23 +102,23 @@ export const api = {
       withAuth: true,
     });
   },
+
+  // --- MESSAGES ---
   async getMessages() {
-    try {
-      return await request<{ data: { conversations: typeof mockConversations } }>("/messages", {
-        withAuth: true,
-      });
-    } catch {
+    if (!sessionStore.getToken()) {
       return { data: { conversations: mockConversations } };
     }
+    return await request<{ data: { conversations: typeof mockConversations } }>("/messages", {
+      withAuth: true,
+    });
   },
   async getConversation(id: string) {
-    try {
-      return await request<{ data: { conversation: (typeof mockConversations)[number] } }>(`/messages/${id}`, {
-        withAuth: true,
-      });
-    } catch {
+    if (!sessionStore.getToken()) {
       return { data: { conversation: mockConversations[0] } };
     }
+    return await request<{ data: { conversation: (typeof mockConversations)[number] } }>(`/messages/${id}`, {
+      withAuth: true,
+    });
   },
   async sendMessage(id: string, body: string) {
     return request(`/messages/${id}/messages`, {
@@ -123,19 +127,20 @@ export const api = {
       withAuth: true,
     });
   },
+
+  // --- LEADERBOARD & AI ---
   async getLeaderboard() {
-    try {
-      return await request<{ data: { leaders: typeof mockLeaders } }>("/users/leaderboard");
-    } catch {
+    // Leaderboard can be public, but we still apply the mock-for-guests rule
+    if (!sessionStore.getToken()) {
       return { data: { leaders: mockLeaders } };
     }
+    return await request<{ data: { leaders: typeof mockLeaders } }>("/users/leaderboard");
   },
   async getAiCenter() {
-    try {
-      return await request<{ data: typeof mockAiCenter }>("/ai/center", { withAuth: true });
-    } catch {
+    if (!sessionStore.getToken()) {
       return { data: mockAiCenter };
     }
+    return await request<{ data: typeof mockAiCenter }>("/ai/center", { withAuth: true });
   },
   async previewAi(payload: { title: string; description: string }) {
     return request<{ data: { preview: { category: string; urgency: string; tags: string[]; suggestedSkills: string[] } } }>(
@@ -146,21 +151,21 @@ export const api = {
       }
     );
   },
+
+  // --- NOTIFICATIONS & PROFILE ---
   async getNotifications() {
-    try {
-      return await request<{ data: { notifications: typeof mockNotifications } }>("/notifications", {
-        withAuth: true,
-      });
-    } catch {
+    if (!sessionStore.getToken()) {
       return { data: { notifications: mockNotifications } };
     }
+    return await request<{ data: { notifications: typeof mockNotifications } }>("/notifications", {
+      withAuth: true,
+    });
   },
   async getProfile() {
-    try {
-      return await request<{ data: { user: typeof mockUser } }>("/users/me", { withAuth: true });
-    } catch {
+    if (!sessionStore.getToken()) {
       return { data: { user: mockUser } };
     }
+    return await request<{ data: { user: typeof mockUser } }>("/users/me", { withAuth: true });
   },
   async updateProfile(payload: Record<string, unknown>) {
     return request<{ data: { user: typeof mockUser } }>("/users/me", {

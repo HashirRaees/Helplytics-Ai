@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { PropsWithChildren, useEffect, useState } from "react";
+import { PropsWithChildren, useState } from "react";
 import { sessionStore } from "@/lib/storage";
 import { SessionUser } from "@/lib/types";
 
@@ -19,11 +19,7 @@ const links = [
 
 export function AppShell({ children }: PropsWithChildren) {
   const pathname = usePathname();
-  const [user, setUser] = useState<SessionUser | null>(null);
-
-  useEffect(() => {
-    setUser(sessionStore.getUser());
-  }, []);
+  const [user] = useState<SessionUser | null>(() => sessionStore.getUser());
 
   return (
     <div className="mx-auto flex min-h-screen max-w-7xl gap-6 px-4 py-5 md:px-8">

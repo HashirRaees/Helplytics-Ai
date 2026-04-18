@@ -1,104 +1,262 @@
-import Link from "next/link";
+"use client";
 
-const pillars = [
-  {
-    title: "Post help requests fast",
-    body: "People can ask for career, community, learning, or technical support in minutes."
-  },
-  {
-    title: "Match the right helpers",
-    body: "Skill tags, urgency detection, and trust scores keep the feed useful and actionable."
-  },
-  {
-    title: "Run a smooth demo",
-    body: "Dashboard stats, messaging, leaderboard, AI center, and notifications make it feel product-ready."
-  },
-];
+import Link from 'next/link';
+import { Header } from "@/components/layout/Header";
 
 export default function Home() {
   return (
-    <main className="grid-bg relative overflow-hidden px-6 py-6 md:px-10">
-      <div className="mx-auto flex min-h-screen max-w-7xl flex-col gap-10">
-        <header className="flex items-center justify-between rounded-[28px] border border-[var(--line)] bg-white/75 px-5 py-4 backdrop-blur md:px-7">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-[var(--primary)]">
-              Helplytics AI
+    <div className="min-h-screen text-[#1c1a17] bg-[#fdfaf5] font-sans selection:bg-[#0f766e]/20 relative overflow-hidden pb-20">
+
+      {/* Background gradients resembling the image */}
+      <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-[#dceddb] rounded-full mix-blend-multiply filter blur-[100px] opacity-60 pointer-events-none transform -translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#faebd6] rounded-full mix-blend-multiply filter blur-[100px] opacity-70 pointer-events-none transform translate-x-1/3 -translate-y-1/3" />
+
+      <div className="relative z-10 mx-auto max-w-[1180px] pt-8 px-4 md:px-8">
+
+        <Header />
+
+        {/* HERO GRID */}
+        <div className="mt-16 md:mt-24 grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-x-12 gap-y-16 items-start pb-20">
+
+          {/* Hero Left */}
+          <div className="flex flex-col justify-center">
+            <div className="eyebrow md:text-left text-center mb-5">
+              Smit Grand Coding Night 2026
+            </div>
+            <h1 className="text-4xl md:text-left text-center md:text-[66px] font-extrabold leading-[1.02] tracking-tighter mb-6 text-[#1c1a17] font-display">
+              Find help faster.<br />Become help that<br />matters.
+            </h1>
+            <p className="text-[#64625b] md:text-left text-center text-[17px] leading-relaxed mb-10 max-w-md font-semibold">
+              Helplytics AI is a community-powered support network for students, mentors, creators, and builders. Ask for help, offer help, track impact, and let AI surface smarter matches across the platform.
             </p>
-            <p className="text-sm text-soft">Community support with startup-grade polish</p>
-          </div>
-          <div className="flex gap-3">
-            <Link href="/explore" className="btn-secondary">
-              Explore
-            </Link>
-            <Link href="/auth" className="btn-primary">
-              Launch App
-            </Link>
-          </div>
-        </header>
+            <div className="flex flex-wrap justify-center md:justify-start items-center gap-3 mb-16 relative z-10">
+              <Link href="/ai-center" className="px-7 py-3.5 text-white! bg-brand-gradient hover:opacity-90 transition-opacity text-white font-semibold rounded-full shadow-[0_6px_20px_rgba(15,118,110,0.25)] text-sm">
+                Open product demo
+              </Link>
+              <Link href="/requests/new" className="px-7 py-3.5 bg-white text-[#1c1a17] font-bold rounded-full shadow-[0_4px_16px_rgba(0,0,0,0.05)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.08)] transition-all text-sm border border-transparent">
+                Post a request
+              </Link>
+            </div>
 
-        <section className="panel relative overflow-hidden px-6 py-10 md:px-10 md:py-14">
-          <div className="absolute right-0 top-0 h-48 w-48 rounded-full bg-[rgba(245,158,11,0.17)] blur-3xl" />
-          <div className="absolute bottom-0 left-0 h-56 w-56 rounded-full bg-[rgba(15,118,110,0.13)] blur-3xl" />
-          <div className="relative grid gap-10 lg:grid-cols-[1.2fr_0.8fr]">
-            <div className="space-y-6">
-              <span className="chip">AI categorization + trust-driven matching</span>
-              <h1 className="max-w-3xl text-4xl font-semibold tracking-tight md:text-6xl">
-                Build a support network that feels less like a forum and more like a real product.
-              </h1>
-              <p className="max-w-2xl text-lg leading-8 text-soft">
-                Helplytics AI helps communities turn requests into outcomes with onboarding, filtered help feeds,
-                helper workflows, messaging, notifications, and lightweight AI suggestions.
+            {/* Stat Cards - Three in a row */}
+            <div className="grid md:grid-cols-3  gap-3 md:gap-4 relative z-0">
+              {/* Stat 1 */}
+              <div className="bg-[#fcfaf7] rounded-3xl p-6 shadow-sm border border-[#edebe6]/60">
+                <div className="text-[10px] font-bold uppercase tracking-widest text-[#7c7973] mb-3">Members</div>
+                <div className="text-3xl font-semibold mb-2 text-[#1c1a17] tracking-tight">384+</div>
+                <p className="text-[12px] text-[#7c7973] leading-relaxed font-semibold">
+                  Students, mentors, and helpers in the loop.
+                </p>
+              </div>
+              {/* Stat 2 */}
+              <div className="bg-[#fcfaf7] rounded-3xl p-6 shadow-sm border border-[#edebe6]/60">
+                <div className="text-[10px] font-bold uppercase tracking-widest text-[#7c7973] mb-3">Requests</div>
+                <div className="text-3xl font-semibold mb-2 text-[#1c1a17] tracking-tight">72+</div>
+                <p className="text-[12px] text-[#7c7973] leading-relaxed font-semibold">
+                  Support posts shared across learning journeys.
+                </p>
+              </div>
+              {/* Stat 3 */}
+              <div className="bg-[#fcfaf7] rounded-3xl p-6 shadow-sm border border-[#edebe6]/60">
+                <div className="text-[10px] font-bold uppercase tracking-widest text-[#7c7973] mb-3">Solved</div>
+                <div className="text-3xl font-semibold mb-2 text-[#1c1a17] tracking-tight">69+</div>
+                <p className="text-[12px] text-[#7c7973] leading-relaxed font-semibold">
+                  Problems resolved through fast community action.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Hero Right Card (Dark Teal) */}
+          <div className="bg-[#112322] text-[#e8f1f0] rounded-[32px] p-8 md:p-10 shadow-2xl relative overflow-hidden h-full flex flex-col pt-12">
+            <div className="absolute top-8 right-8 w-16 h-16 bg-gradient-to-tr from-[#d97706] to-[#fcd34d] rounded-full blur-[1px] shadow-[0_0_80px_rgba(245,158,11,0.6)]"></div>
+
+            <div className="relative z-10">
+              <div className="eyebrow !text-[#9ccbcb] hover:!text-white transition-colors mb-4">
+                Live product feel
+              </div>
+              <h2 className="text-3xl md:text-[44px] font-semibold text-white leading-[1.1] mb-6 tracking-tight font-display">
+                More than a form.<br />More like an<br />ecosystem.
+              </h2>
+              <p className="text-[#a4bcbb] text-[14.5px] leading-[1.7] mb-10 pb-2 max-w-[95%] font-semibold">
+                A polished multi-page experience inspired by product platforms, with AI summaries, trust scores, contribution signals, notifications, and leaderboard momentum built directly in HTML, CSS, JavaScript, and LocalStorage.
               </p>
-              <div className="flex flex-wrap gap-4">
-                <Link href="/auth" className="btn-primary">
-                  Create account
-                </Link>
-                <Link href="/dashboard" className="btn-secondary">
-                  Preview dashboard
-                </Link>
-              </div>
-              <div className="grid gap-4 pt-4 md:grid-cols-3">
-                {["Need help", "Can help", "Both roles"].map((item) => (
-                  <div key={item} className="soft-panel px-4 py-4 text-sm font-medium">
-                    {item}
-                  </div>
-                ))}
-              </div>
-            </div>
 
-            <div className="soft-panel space-y-5 p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[var(--primary)]">
-                    Live snapshot
+              {/* Inner cards */}
+              <div className="space-y-3.5 mt-auto">
+                <div className="bg-[#edece8] text-[#1c1a17] rounded-2xl p-5 shadow-sm">
+                  <h3 className="font-semibold text-[15px] mb-1 tracking-tight font-display">AI request intelligence</h3>
+                  <p className="text-[13px] text-[#605d58] font-semibold leading-relaxed">
+                    Auto-categorization, urgency detection, tags, rewrite suggestions, and trend snapshots.
                   </p>
-                  <h2 className="mt-2 text-2xl font-semibold">What the demo highlights</h2>
                 </div>
-                <span className="chip bg-[rgba(245,158,11,0.12)] text-amber-700">Hackathon-ready</span>
+
+                <div className="bg-[#edece8] text-[#1c1a17] rounded-2xl p-5 shadow-sm">
+                  <h3 className="font-semibold text-[15px] mb-1 tracking-tight font-display">Community trust graph</h3>
+                  <p className="text-[13px] text-[#605d58] font-semibold leading-relaxed">
+                    Badges, helper rankings, trust score boosts, and visible contribution history.
+                  </p>
+                </div>
+
+                <div className="bg-[#edece8] text-[#1c1a17] rounded-2xl p-5 shadow-sm">
+                  <h3 className="font-semibold text-[15px] mb-1 tracking-tight font-display">100%</h3>
+                  <p className="text-[13px] text-[#605d58] font-semibold leading-relaxed">
+                    Top trust score currently active across the sample mentor network.
+                  </p>
+                </div>
               </div>
-              {pillars.map((pillar) => (
-                <div key={pillar.title} className="rounded-[20px] border border-[var(--line)] bg-white/85 p-5">
-                  <h3 className="text-lg font-semibold">{pillar.title}</h3>
-                  <p className="mt-2 text-sm leading-7 text-soft">{pillar.body}</p>
-                </div>
-              ))}
             </div>
           </div>
-        </section>
+        </div>
 
-        <section className="grid gap-4 md:grid-cols-3">
-          {[
-            ["Requests", "Auto-tagged, categorized, urgency-aware help requests"],
-            ["Messaging", "Simple conversation flow between requester and helper"],
-            ["Leaderboard", "Trust score and contribution rankings for top helpers"],
-          ].map(([title, body]) => (
-            <div key={title} className="panel p-6">
-              <h3 className="text-xl font-semibold">{title}</h3>
-              <p className="mt-3 text-sm leading-7 text-soft">{body}</p>
+        {/* CORE FLOW */}
+        <div className="mt-14 relative z-10 border-t border-gray-200/40 pt-16">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 pb-1">
+            <div>
+              <div className="eyebrow mb-4">
+                Core Flow
+              </div>
+              <h2 className="text-3xl md:text-[40px] font-extrabold tracking-tight text-[#1c1a17] font-display">
+                From struggling alone to solving together
+              </h2>
             </div>
-          ))}
-        </section>
+            <div className="shrink-0">
+              <Link href="/onboarding" className="inline-block w-full md:w-auto text-center px-6 py-2.5 bg-white text-[#1c1a17] font-bold text-sm rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-md transition-shadow">
+                Try onboarding AI
+              </Link>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+            {/* Flow Card 1 */}
+            <div className="bg-[#fcfaf7] rounded-3xl p-8 shadow-sm text-[#1c1a17] border border-[#f0eee9]">
+              <h3 className="text-[17px] font-bold tracking-tight mb-2 font-display">Ask for help clearly</h3>
+              <p className="text-[14px] text-[#5f685f] font-semibold leading-[1.6]">
+                Create structured requests with category, urgency, AI suggestions, and tags that attract the right people.
+              </p>
+            </div>
+            {/* Flow Card 2 */}
+            <div className="bg-[#fcfaf7] rounded-3xl p-8 shadow-sm text-[#1c1a17] border border-[#f0eee9]">
+              <h3 className="text-[17px] font-bold tracking-tight mb-2 font-display">Discover the right people</h3>
+              <p className="text-[14px] text-[#5f685f] font-semibold leading-[1.6]">
+                Use the explore feed, helper lists, notifications, and messaging to move quickly once a match happens.
+              </p>
+            </div>
+            {/* Flow Card 3 */}
+            <div className="bg-[#fcfaf7] rounded-3xl p-8 shadow-sm text-[#1c1a17] border border-[#f0eee9]">
+              <h3 className="text-[17px] font-bold tracking-tight mb-2 font-display">Track real contribution</h3>
+              <p className="text-[14px] text-[#5f685f] font-semibold leading-[1.6]">
+                Trust scores, badges, solved requests, and rankings help the community recognize meaningful support.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* FEATURED REQUESTS */}
+        <div className="mt-28 relative z-10 border-t border-gray-200/40 pt-16">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 pb-1 text-[#1c1a17]">
+            <div>
+              <div className="eyebrow mb-4">
+                Featured Requests
+              </div>
+              <h2 className="text-3xl md:text-[40px] font-extrabold tracking-tight font-display">
+                Community problems currently in motion
+              </h2>
+            </div>
+            <div className="shrink-0">
+              <Link href="/explore" className="inline-block w-full md:w-auto text-center px-6 py-2.5 bg-white text-[#1c1a17] font-bold text-sm rounded-full shadow-[0_2px_8px_rgba(0,0,0,0.04)] hover:shadow-md transition-shadow">
+                View full feed
+              </Link>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+            {/* Request Card 1 */}
+            <div className="bg-white rounded-3xl p-7 shadow-[0_4px_24px_rgba(0,0,0,0.03)] border border-[#f4f2ea] flex flex-col pt-8">
+              <div className="flex flex-wrap gap-2 mb-4">
+                <span className="px-3 py-1.5 text-[10px] font-bold tracking-wide rounded-full bg-[#f0f6f5] text-[#0f766e]">Web Development</span>
+                <span className="px-3 py-1.5 text-[10px] font-bold tracking-wide rounded-full bg-[#fee8e8] text-[#c81e1e]">High</span>
+                <span className="px-3 py-1.5 text-[10px] font-bold tracking-wide rounded-full bg-[#e8f7ec] text-[#1c813f]">Solved</span>
+              </div>
+              <h3 className="text-[18px] font-bold tracking-tight leading-snug mb-2 text-[#1c1a17] font-display">Need help</h3>
+              <p className="text-[14px] text-[#5f685f] flex-grow font-semibold mb-12 mt-1">
+                help needed
+              </p>
+              <div className="flex flex-col md:flex-row items-start md:items-center justify-between mt-auto gap-4">
+                <div className="flex flex-col">
+                  <div className="font-bold text-[14px] text-[#1c1a17] tracking-tight">Ayesha Khan</div>
+                  <div className="text-[11.5px] text-[#5f685f] font-semibold">Karachi • 1 helper interested</div>
+                </div>
+                <Link href="/requests/1" className="w-full md:w-auto px-4 py-[10px] bg-[#f9f8f6] text-[#1c1a17] text-[13px] font-bold rounded-xl shadow-sm transition-colors shrink-0 border border-[#1a1f1d]/5 hover:bg-white text-center leading-[1.1] tracking-tight">
+                  Open details
+                </Link>
+              </div>
+            </div>
+
+            {/* Request Card 2 */}
+            <div className="bg-white rounded-3xl p-7 shadow-[0_4px_24px_rgba(0,0,0,0.03)] border border-[#f4f2ea] flex flex-col pt-8">
+              <div className="flex flex-wrap gap-2 mb-4">
+                <span className="px-3 py-1.5 text-[10px] font-bold tracking-wide rounded-full bg-[#f0f6f5] text-[#0f766e]">Web Development</span>
+                <span className="px-3 py-1.5 text-[10px] font-bold tracking-wide rounded-full bg-[#fee8e8] text-[#c81e1e]">High</span>
+                <span className="px-3 py-1.5 text-[10px] font-bold tracking-wide rounded-full bg-[#e8f7ec] text-[#1c813f]">Solved</span>
+              </div>
+              <h3 className="text-[18px] font-bold tracking-tight leading-[1.25] mb-3 text-[#1c1a17] font-display">Need help making my portfolio responsive before demo day</h3>
+              <p className="text-[14px] text-[#5f685f] font-semibold mb-8">
+                My HTML/CSS portfolio breaks on tablets and I need layout guidance before tomorrow evening.
+              </p>
+              <div className="flex flex-wrap gap-2 mb-6">
+                <span className="px-3.5 py-1.5 bg-[#f0f6f5] text-[10px] font-bold tracking-wide text-[#0f766e] rounded-full">HTML/CSS</span>
+                <span className="px-3.5 py-1.5 bg-[#f0f6f5] text-[10px] font-bold tracking-wide text-[#0f766e] rounded-full">Responsive</span>
+                <span className="px-3.5 py-1.5 bg-[#f0f6f5] text-[10px] font-bold tracking-wide text-[#0f766e] rounded-full">Portfolio</span>
+              </div>
+              <div className="flex items-center justify-between mt-auto">
+                <div className="flex flex-col">
+                  <div className="font-bold text-[14px] text-[#1c1a17] tracking-tight">Sara Noor</div>
+                  <div className="text-[11.5px] text-[#5f685f] font-semibold">Karachi • 1 helper interested</div>
+                </div>
+                <Link href="/requests/2" className="px-4 py-[10px] bg-[#f9f8f6] text-[#1c1a17] text-[13px] font-bold rounded-xl shadow-sm transition-colors shrink-0 border border-[#1a1f1d]/5 hover:bg-white text-center leading-[1.1] tracking-tight">
+                  Open<span className="text-[12px] font-bold">details</span>
+                </Link>
+              </div>
+            </div>
+
+            {/* Request Card 3 */}
+            <div className="bg-white rounded-3xl p-7 shadow-[0_4px_24px_rgba(0,0,0,0.03)] border border-[#f4f2ea] flex flex-col pt-8">
+              <div className="flex flex-wrap gap-2 mb-4">
+                <span className="px-3 py-1.5 text-[10px] font-bold tracking-wide rounded-full bg-[#f0f9ff] text-[#0284c7]">Design</span>
+                <span className="px-3 py-1.5 text-[10px] font-bold tracking-wide rounded-full bg-[#f3f4f6] text-[#4b5563]">Medium</span>
+                <span className="px-3 py-1.5 text-[10px] font-bold tracking-wide rounded-full bg-[#f9fafb] text-[#6b7280]">Open</span>
+              </div>
+              <h3 className="text-[18px] font-bold tracking-tight leading-[1.25] mb-3 text-[#1c1a17] font-display">Looking for Figma feedback on a volunteer event poster</h3>
+              <p className="text-[14px] text-[#5f685f] font-semibold mb-8">
+                I have a draft poster for a campus community event and want sharper hierarchy, spacing, and CTA copy.
+              </p>
+              <div className="flex flex-wrap gap-2 mb-6">
+                <span className="px-3.5 py-1.5 bg-[#f0f6f5] text-[10px] font-bold tracking-wide text-[#0f766e] rounded-full">Figma</span>
+                <span className="px-3.5 py-1.5 bg-[#f0f6f5] text-[10px] font-bold tracking-wide text-[#0f766e] rounded-full">Poster</span>
+                <span className="px-3.5 py-1.5 bg-[#f0f6f5] text-[10px] font-bold tracking-wide text-[#0f766e] rounded-full">Design Review</span>
+              </div>
+              <div className="flex items-center justify-between mt-auto">
+                <div className="flex flex-col">
+                  <div className="font-bold text-[14px] text-[#1c1a17] tracking-tight">Ayesha Khan</div>
+                  <div className="text-[11.5px] text-[#5f685f] font-semibold">Lahore • 1 helper interested</div>
+                </div>
+                <Link href="/requests/3" className="px-4 py-[10px] bg-[#f9f8f6] text-[#1c1a17] text-[13px] font-bold rounded-xl shadow-sm transition-colors shrink-0 border border-[#1a1f1d]/5 hover:bg-white text-center leading-[1.1] tracking-tight">
+                  Open<span className="text-[12px] font-bold">details</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <div className="mt-28 border-t flex justify-center border-[#f0eee9] pt-8 pb-4 text-center md:text-left relative z-10">
+          <p className="text-[12px] text-[#778077] font-semibold">
+            Helplytics AI is built as a premium-feel, multi-page community support product using HTML, CSS, JavaScript, and LocalStorage.
+          </p>
+        </div>
+
       </div>
-    </main>
+    </div>
   );
 }
