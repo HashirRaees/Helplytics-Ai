@@ -27,7 +27,7 @@ export default function AuthPage() {
       <div className="relative z-10 mx-auto max-w-[1180px] pt-8 px-4 md:px-8">
 
         {/* COMPACT AUTH HEADER */}
-        <div className="flex justify-between items-center mb-16 md:mb-24">
+        <div className="flex justify-center md:justify-between items-center mb-16 md:mb-24">
           <Link href="/" className="flex items-center space-x-2.5 group">
             <div className="bg-[#0f766e] text-white w-10 h-10 flex items-center justify-center rounded-md font-bold text-sm shadow-sm group-hover:scale-105 transition-transform">
               H
@@ -35,7 +35,7 @@ export default function AuthPage() {
             <span className="font-bold text-[18px] tracking-tight font-display">Helplytics AI</span>
           </Link>
 
-          <nav className="flex items-center space-x-2">
+          <nav className="hidden md:flex items-center space-x-2">
             <Link href="/" className={navItemClass('/')}>Home</Link>
             <Link href="/explore" className={navItemClass('/explore')}>Explore</Link>
             <Link href="/leaderboard" className={navItemClass('/leaderboard')}>Leaderboard</Link>
