@@ -10,6 +10,7 @@ export function Header() {
   const pathname = usePathname();
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDashboardSubMenuOpen, setIsDashboardSubMenuOpen] = useState(false);
   const [user, setUser] = useState<SessionUser | null>(null);
 
   // Sync auth state
@@ -52,7 +53,7 @@ export function Header() {
     return pathname?.startsWith(href);
   };
 
-  const activeClass = "px-4 py-2 bg-[#edeae4] rounded-full text-[#1c1a17] font-semibold text-[13px] tracking-tight transition-all";
+  const activeClass = "px-4 py-2 rounded-full text-[#1c1a17] font-semibold text-[13px] tracking-tight transition-all";
   const inactiveClass = "px-4 py-2 text-[#5f685f] hover:text-[#1a1f1d] transition-colors text-[13px] tracking-tight font-semibold transition-all";
 
   return (
@@ -66,20 +67,53 @@ export function Header() {
       </Link>
 
       {/* DESKTOP NAV */}
-      <div className="hidden lg:flex px-1.5 py-1.5 items-center bg-[#fdfaf5]/50 backdrop-blur-sm rounded-full border border-[#1a1f1d]/5">
+      <div className="hidden lg:flex px-5 py-1.5 items-center bg-[#fdfaf5]/50 gap-5">
         {navItems.map((item) => (
-          <Link 
-            key={item.href}
-            href={item.href} 
-            className={isActive(item.href) ? activeClass : inactiveClass}
-          >
-            {item.label}
-          </Link>
+          <div key={item.href} className="relative group shrink-0">
+            <Link 
+              href={item.href} 
+              className={isActive(item.href) ? activeClass : inactiveClass}
+            >
+              <div className="flex items-center space-x-1">
+                <span>{item.label}</span>
+                {item.label === 'Dashboard' && (
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="group-hover:rotate-180 transition-transform">
+                    <polyline points="6 9 12 15 18 9"></polyline>
+                  </svg>
+                )}
+              </div>
+            </Link>
+
+            {item.label === 'Dashboard' && (
+              <div className="absolute top-10 left-0 mt-2 w-48 bg-white/90 backdrop-blur-md rounded-2xl border border-[#1a1f1d]/5 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 p-1.5 z-50">
+                <Link 
+                  href="/requests/new" 
+                  className="flex items-center space-x-2 px-3 py-2.5 hover:bg-[#edeae4]/50 rounded-xl transition-colors text-[13px] text-[#5f685f] hover:text-[#1c1a17] font-semibold"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#0f766e]">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                  </svg>
+                  <span>Create Request</span>
+                </Link>
+                <Link 
+                  href="/notifications" 
+                  className="flex items-center space-x-2 px-3 py-2.5 hover:bg-[#edeae4]/50 rounded-xl transition-colors text-[13px] text-[#5f685f] hover:text-[#1c1a17] font-semibold"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-[#0f766e]">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                  </svg>
+                  <span>Notifications</span>
+                </Link>
+              </div>
+            )}
+          </div>
         ))}
       </div>
 
       {/* DESKTOP ACTIONS */}
-      <div className="hidden lg:flex items-center space-x-3">
+      <div className="hidden lg:flex items-center gap-3">
         {user ? (
           <>
             <Link 
@@ -155,17 +189,54 @@ export function Header() {
 
           <div className="flex flex-col space-y-2 flex-grow">
             {navItems.map((item) => (
-              <Link 
-                key={item.href}
-                href={item.href} 
-                className={`py-3 px-4 rounded-xl text-[14px] font-bold tracking-wider transition-all ${
-                  isActive(item.href) 
-                    ? 'bg-[#edeae4] text-[#1c1a17]' 
-                    : 'text-[#5f685f] hover:bg-[#f9f8f4]'
-                }`}
-              >
-                {item.label}
-              </Link>
+              <div key={item.href} className="flex flex-col">
+                <div className="flex items-center">
+                  <Link 
+                    href={item.href}
+                    onClick={(e) => {
+                      if (item.label === 'Dashboard') {
+                        // User can still click dashboard link, but lets allow toggle separately
+                      }
+                    }}
+                    className={`flex-grow py-3 px-4 rounded-xl text-[14px] font-bold tracking-wider transition-all whitespace-nowrap ${
+                      isActive(item.href) 
+                        ? 'bg-[#edeae4] text-[#1c1a17]' 
+                        : 'text-[#5f685f] hover:bg-[#f9f8f4]'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                  {item.label === 'Dashboard' && (
+                    <button 
+                      onClick={() => setIsDashboardSubMenuOpen(!isDashboardSubMenuOpen)}
+                      className="p-3 text-[#5f685f]"
+                    >
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={`transition-transform duration-200 ${isDashboardSubMenuOpen ? 'rotate-180' : ''}`}>
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                      </svg>
+                    </button>
+                  )}
+                </div>
+                
+                {item.label === 'Dashboard' && isDashboardSubMenuOpen && (
+                  <div className="flex flex-col mt-1 ml-4 space-y-1 border-l-2 border-[#1a1f1d]/5 pl-2">
+                    <Link 
+                      href="/requests/new" 
+                      className="py-2.5 px-4 rounded-xl text-[13px] font-bold text-[#5f685f] hover:bg-[#f9f8f4] transition-all flex items-center space-x-2"
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#0f766e]"></span>
+                      <span>CREATE REQUEST</span>
+                    </Link>
+                    <Link 
+                      href="/notifications" 
+                      className="py-2.5 px-4 rounded-xl text-[13px] font-bold text-[#5f685f] hover:bg-[#f9f8f4] transition-all flex items-center space-x-2"
+                    >
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#0f766e]"></span>
+                      <span>NOTIFICATIONS</span>
+                    </Link>
+                  </div>
+                )}
+              </div>
             ))}
             {user && (
               <Link 
